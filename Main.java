@@ -7,9 +7,10 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         Random random = new Random();
 
-        System.out.print("Entre com o numero de elementos pilhas: ");
+        System.out.print("Entre com o numero de elementos da pilhas: ");
         int capacidade = scan.nextInt();
-        System.out.println("Entre com 1 para crescente e 0 para decrescente: ");
+        System.out.println("Como voce deseja ordenar a pilha?");
+        System.out.print("Entre com 1 para crescente e 0 para decrescente: ");
         int ordenacao = scan.nextInt();
         Pilha verificadora = new Pilha(capacidade);
         Pilha pilha1 = new Pilha(capacidade);
@@ -34,17 +35,11 @@ public class Main {
             jogo.mostrarPilhas();
             System.out.println("Qual ação deseja realizar?");
             System.out.println("1. Movimentar elemento");
-            if(capacidade == 3){
-                System.out.println("2. Solucao automatica");
-            }
             System.out.println("0. Sair do jogo");
             int acao = scan.nextInt();
             switch (acao){
                 case 1 :
                     jogo.movimentar(scan);
-                    break;
-                case 2:
-                    jogo.solucaoAutomatica();
                     break;
                 case 0:
                     break;
@@ -58,7 +53,5 @@ public class Main {
                 break;
             }
         }
-
     }
-
 }

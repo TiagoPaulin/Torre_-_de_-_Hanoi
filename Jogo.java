@@ -1,7 +1,6 @@
-
 import java.util.Scanner;
-
 public class Jogo {
+    // definindo atributos do jogo
     private Pilha pilha1;
     private Pilha pilha2;
     private Pilha pilha3;
@@ -10,9 +9,7 @@ public class Jogo {
     private Node push;
     private int ordenacao;
     private int jogadas;
-    private int minJogadas;
-    private boolean entrou;
-
+    // metodo construtor
     public Jogo(Pilha pilha1, Pilha pilha2, Pilha pilha3, Pilha verificadora, int ordenacao) {
         this.pilha1 = pilha1;
         this.pilha2 = pilha2;
@@ -22,10 +19,8 @@ public class Jogo {
         this.push = null;
         this.ordenacao = ordenacao;
         this.jogadas = 0;
-        this.minJogadas = 0;
-        this.entrou = true;
     }
-
+    // metod para mostrar as 3 pilhas do jogo
     public void mostrarPilhas(){
         System.out.println("\n");
         System.out.println("\n");
@@ -51,10 +46,8 @@ public class Jogo {
             pilha3.imprimir();
         }
         System.out.println("\n Jogadas realizadas: " + jogadas);
-        System.out.println("\n Jogadas automaticas: " + minJogadas);
-
     }
-
+    // metodo para remover o dado da pilha escolhida
     public Node pop(Scanner scan){
         System.out.println("Digite 1, 2 ou 3 para selecionar a pilha que vai remover o dado: ");
         int resposta = scan.nextInt();
@@ -96,7 +89,7 @@ public class Jogo {
         }
         return pop;
     }
-
+    // metodo para inserir o dado na pilha de destino
     public void push(Node pop, Scanner scan){
         push = pop;
         System.out.println("Digite 1, 2 ou 3 para selecionar a pilha que vai receber o dado: ");
@@ -113,7 +106,7 @@ public class Jogo {
                         pilha1.inserir(dadoPush);
                     } else {
                         System.out.println("Voce nao pode inserir esse valor pois ele e maior que o topo atual");
-                        System.out.println("Pressione quelquer tecla para continuar");
+                        System.out.println("Pressione qualquer tecla para continuar");
                         scan.nextLine();
                         scan.nextLine();
                         push(pop, scan);
@@ -123,7 +116,7 @@ public class Jogo {
                         pilha1.inserir(dadoPush);
                     } else {
                         System.out.println("Voce nao pode inserir esse valor pois ele e maior que o topo atual");
-                        System.out.println("Pressione quelquer tecla para continuar");
+                        System.out.println("Pressione qualquer tecla para continuar");
                         scan.nextLine();
                         scan.nextLine();
                         push(pop, scan);
@@ -142,7 +135,7 @@ public class Jogo {
                         pilha2.inserir(dadoPush);
                     } else {
                         System.out.println("Voce nao pode inserir esse valor pois ele e maior que o topo atual");
-                        System.out.println("Pressione quelquer tecla para continuar");
+                        System.out.println("Pressione qualquer tecla para continuar");
                         scan.nextLine();
                         scan.nextLine();
                         push(pop, scan);
@@ -152,7 +145,7 @@ public class Jogo {
                         pilha2.inserir(dadoPush);
                     } else {
                         System.out.println("Voce nao pode inserir esse valor pois ele e maior que o topo atual");
-                        System.out.println("Pressione quelquer tecla para continuar");
+                        System.out.println("Pressione qualquer tecla para continuar");
                         scan.nextLine();
                         scan.nextLine();
                         push(pop, scan);
@@ -171,7 +164,7 @@ public class Jogo {
                         pilha3.inserir(dadoPush);
                     } else {
                         System.out.println("Voce nao pode inserir esse valor pois ele e maior que o topo atual");
-                        System.out.println("Pressione quelquer tecla para continuar");
+                        System.out.println("Pressione qualquer tecla para continuar");
                         scan.nextLine();
                         scan.nextLine();
                         push(pop, scan);
@@ -181,7 +174,7 @@ public class Jogo {
                         pilha3.inserir(dadoPush);
                     } else {
                         System.out.println("Voce nao pode inserir esse valor pois ele e maior que o topo atual");
-                        System.out.println("Pressione quelquer tecla para continuar");
+                        System.out.println("Pressione qualquer tecla para continuar");
                         scan.nextLine();
                         scan.nextLine();
                         push(pop, scan);
@@ -197,7 +190,7 @@ public class Jogo {
         this.pop = null;
         this.push = null;
     }
-
+    // metodo para movimentar o dado entre as pilhas
     public void movimentar(Scanner scan){
         mostrarPilhas();
         Node aux = pop(scan);
@@ -206,286 +199,7 @@ public class Jogo {
         mostrarPilhas();
         jogadas ++;
     }
-
-    public Node autoPop(int id){
-        int idPilha = id;
-        if(idPilha == 1){
-            if(pilha1.getTopoDado() != null){
-                pop = pilha1.getTopoDado();
-                pilha1.remover();
-            }
-        } else if (idPilha == 2){
-            if(pilha2.getTopoDado() != null){
-                pop = pilha2.getTopoDado();
-                pilha2.remover();
-            }
-        } else if (idPilha == 3){
-            if(pilha3.getTopoDado() != null){
-                pop = pilha3.getTopoDado();
-                pilha3.remover();
-            }
-        } else {
-            pop = null;
-        }
-        return pop;
-    }
-
-    public void autoPush(Node pop, int id){
-        push = pop;
-        int idPilha = id;
-        if(idPilha == 1){
-            int dadoPush = push.getInformacao();
-            Node topoAtual = pilha1.getTopoDado();
-            if(topoAtual == null){
-                pilha1.inserir(dadoPush);
-                entrou = true;
-            } else {
-                int dadoAtual = topoAtual.getInformacao();
-                if(ordenacao == 1){
-                    if(dadoPush <= dadoAtual){
-                        pilha1.inserir(dadoPush);
-                        entrou = true;
-                    } else {
-                        entrou = false;
-                    }
-                } else {
-                    if(dadoPush >= dadoAtual){
-                        pilha1.inserir(dadoPush);
-                        entrou = true;
-                    } else {
-                        entrou = false;
-                    }
-                }
-            }
-        } else if(idPilha == 2){
-            int dadoPush = push.getInformacao();
-            Node topoAtual = pilha2.getTopoDado();
-            if(topoAtual == null){
-                pilha2.inserir(dadoPush);
-                entrou = true;
-            } else {
-                int dadoAtual = topoAtual.getInformacao();
-                if(ordenacao == 1){
-                    if(dadoPush <= dadoAtual){
-                        pilha2.inserir(dadoPush);
-                        entrou = true;
-                    } else {
-                        entrou = false;
-                    }
-                } else {
-                    if(dadoPush >= dadoAtual){
-                        pilha2.inserir(dadoPush);
-                        entrou = true;
-                    } else {
-                        entrou = false;
-                    }
-                }
-            }
-        } else if(idPilha == 3){
-            int dadoPush = push.getInformacao();
-            Node topoAtual = pilha3.getTopoDado();
-            if(topoAtual == null){
-                pilha3.inserir(dadoPush);
-                entrou = true;
-            } else {
-                int dadoAtual = topoAtual.getInformacao();
-                if(ordenacao == 1){
-                    if(dadoPush <= dadoAtual){
-                        pilha3.inserir(dadoPush);
-                        entrou = true;
-                    } else {
-                        entrou = false;
-                    }
-                } else {
-                    if(dadoPush >= dadoAtual){
-                        entrou = true;
-                    } else {
-                        entrou = false;
-                    }
-                }
-            }
-        }
-        this.pop = null;
-        this.push = null;
-    }
-
-
-    public void solucaoAutomatica() {
-        Node aux;
-        mostrarPilhas();
-        if ((pilha2.getTopoDado() == null) && (pilha3.getTopoDado() == null)) {
-            aux = autoPop(1);
-            if (aux != null) {
-                mostrarPilhas();
-                autoPush(aux, 3);
-                minJogadas++;
-                mostrarPilhas();
-            }
-        }
-        if (pilha2.getTopoDado() == null) {
-            aux = autoPop(1);
-            if (aux != null) {
-                mostrarPilhas();
-                autoPush(aux, 2);
-                minJogadas++;
-                mostrarPilhas();
-            }
-        }
-        while (true) {
-            aux = autoPop(1);
-            autoPush(aux, 2);
-            if(!entrou){
-                autoPush(aux, 3);
-                if(!entrou){
-                    pilha1.inserir(aux.getInformacao());
-                    aux = autoPop(2);
-                    autoPush(aux, 1);
-                    if(!entrou){
-                        autoPush(aux, 3);
-                        if(!entrou){
-                            pilha2.inserir(aux.getInformacao());
-                            aux = autoPop(3);
-                            autoPush(aux, 1);
-                            if(!entrou){
-                                autoPush(aux, 2);
-                                minJogadas ++;
-                                mostrarPilhas();
-                                aux = autoPop(1);
-                                mostrarPilhas();
-                                autoPush(aux, 2);
-                                minJogadas ++;
-                                mostrarPilhas();
-                            } else {
-                                minJogadas ++;
-                                mostrarPilhas();
-                                aux = autoPop(2);
-                                autoPush(aux, 1);
-                                if(!entrou){
-                                    entrou = true;
-                                    pilha3.inserir(aux.getInformacao());
-                                    aux = autoPop(1);
-                                    mostrarPilhas();
-                                    autoPush(aux, 3);
-                                    minJogadas ++;
-                                    mostrarPilhas();
-                                    aux = autoPop(2);
-                                    mostrarPilhas();
-                                    autoPush(aux, 1);
-                                    minJogadas ++;
-                                    mostrarPilhas();
-                                    aux = autoPop(3);
-                                    mostrarPilhas();
-                                    autoPush(aux, 1);
-                                    minJogadas ++;
-                                    mostrarPilhas();
-                                }
-                            }
-                        } else {
-                            minJogadas ++;
-                            mostrarPilhas();
-                            aux = autoPop(1);
-                            autoPush(aux, 3);
-                            if(!entrou){
-                                entrou = true;
-                                pilha3.inserir(aux.getInformacao());
-                                aux = autoPop(3);
-                                mostrarPilhas();
-                                autoPush(aux, 2);
-                                minJogadas ++;
-                                mostrarPilhas();
-                                aux = autoPop(1);
-                                mostrarPilhas();
-                                autoPush(aux, 3);
-                                minJogadas ++;
-                                mostrarPilhas();
-                                aux = autoPop(2);
-                                mostrarPilhas();
-                                autoPush(aux, 3);
-                                minJogadas ++;
-                                mostrarPilhas();
-                            }
-                        }
-                    } else {
-                        minJogadas ++;
-                        mostrarPilhas();
-                        aux = autoPop(3);
-                        autoPush(aux, 1);
-                        if(!entrou){
-                            entrou = true;
-                            pilha3.inserir(aux.getInformacao());
-                            aux = autoPop(1);
-                            mostrarPilhas();
-                            autoPush(aux, 2);
-                            minJogadas ++;
-                            mostrarPilhas();
-                            aux = autoPop(3);
-                            mostrarPilhas();
-                            autoPush(aux, 1);
-                            minJogadas ++;
-                            mostrarPilhas();
-                            aux = autoPop(2);
-                            mostrarPilhas();
-                            autoPush(aux, 1);
-                            minJogadas ++;
-                            mostrarPilhas();
-                        }
-                    }
-                } else {
-                    minJogadas ++;
-                    mostrarPilhas();
-                    aux = autoPop(2);
-                    autoPush(aux, 3);
-                    if(!entrou){
-                        entrou = true;
-                        pilha3.inserir(aux.getInformacao());
-                        aux = autoPop(3);
-                        mostrarPilhas();
-                        autoPush(aux, 1);
-                        minJogadas ++;
-                        mostrarPilhas();
-                        aux = autoPop(2);
-                        mostrarPilhas();
-                        autoPush(aux, 3);
-                        minJogadas ++;
-                        mostrarPilhas();
-                        aux = autoPop(1);
-                        mostrarPilhas();
-                        autoPush(aux, 3);
-                        minJogadas ++;
-                        mostrarPilhas();
-                    }
-                }
-            } else {
-                minJogadas ++;
-                mostrarPilhas();
-                aux = autoPop(3);
-                autoPush(aux, 2);
-                if(!entrou){
-                    entrou = true;
-                    pilha3.inserir(aux.getInformacao());
-                    aux = autoPop(2);
-                    mostrarPilhas();
-                    autoPush(aux, 1);
-                    minJogadas ++;
-                    mostrarPilhas();
-                    aux = autoPop(3);
-                    mostrarPilhas();
-                    autoPush(aux, 2);
-                    minJogadas ++;
-                    mostrarPilhas();
-                    aux = autoPop(1);
-                    mostrarPilhas();
-                    autoPush(aux, 2);
-                    minJogadas ++;
-                    mostrarPilhas();
-                }
-            }
-            if (saoIguais(verificadora, pilha1) || saoIguais(verificadora, pilha2) || saoIguais(verificadora, pilha3)) {
-                break;
-            }
-        }
-    }
-
+    // metodo que verifica condicao de vitoria
     public boolean saoIguais(Pilha pilha1, Pilha pilha2) {
         if (pilha1.getTopo() != pilha2.getTopo()) {
             return false;
@@ -501,15 +215,13 @@ public class Jogo {
         }
         return true;
     }
-
+    // metodos get
     public Pilha getPilha1() {
         return pilha1;
     }
-
     public Pilha getPilha2() {
         return pilha2;
     }
-
     public Pilha getPilha3(){
         return pilha3;
     }

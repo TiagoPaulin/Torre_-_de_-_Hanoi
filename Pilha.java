@@ -1,32 +1,32 @@
 public class Pilha {
+    // definindo atributos da pilha
     private int topo;
     private Node pilha;
     private Node topoDado;
     private int capacidade;
-
+    // metodo construtor
     public Pilha(int capacidade) {
         this.capacidade = capacidade;
         this.topo = -1;
         this.pilha = null;
         this.topoDado = null;
     }
-
-    public boolean vazio(){
+    // metodods auxiliares para verificar se a pilha esta cheia ou vazia
+    private boolean vazio(){
         if(topo == -1){
             return true;
         } else {
             return false;
         }
     }
-
-    public boolean cheio(){
+    private boolean cheio(){
         if(topo == (capacidade - 1)){
             return true;
         } else {
             return false;
         }
     }
-
+    //metodo para inserir dados na pilha
     public void inserir(int dado){
         Node no = new Node();
         no.setInformacao(dado);
@@ -43,7 +43,7 @@ public class Pilha {
             System.out.println("A pilha ja atingiu a capacidade maxima");
         }
     }
-
+    // metodo para imprimir a pilha
     public void imprimir(){
         Node atual = pilha; // criar o atual pra nao anular minha pilha
         int varrer = 0;
@@ -56,7 +56,7 @@ public class Pilha {
             varrer ++;
         }
     }
-
+    // metodo para remover elementos da pilha
     public void remover(){
         if(vazio()){
             System.out.println("Pilha vazia");
@@ -66,7 +66,7 @@ public class Pilha {
             topo --;
         }
     }
-
+    // metodo para ordenar os elementos da pilha de forma crescente
     public void ordenarCrescente(){
         int nElementos = (topo + 1);
         int contador = 0;
@@ -89,7 +89,7 @@ public class Pilha {
             contador++;
         }
     }
-
+    // metodo para ordenara a pilha de forma decrescente
     public void ordenarDecrescente(){
         int nElementos = (topo + 1);
         int contador = 0;
@@ -112,15 +112,13 @@ public class Pilha {
             contador++;
         }
     }
-
+    // metodos get
     public Node getTopoDado() {
         return topoDado;
     }
-
     public Node getPilha() {
         return pilha;
     }
-
     public int getTopo() {
         return topo;
     }
